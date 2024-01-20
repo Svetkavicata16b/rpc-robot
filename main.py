@@ -1,26 +1,18 @@
-def градуси(servo: number, добавени_градуси: number):
-    global завъртяно_servo_градуси
-    завъртяно_servo_градуси = servo + добавени_градуси
-    if not (завъртяно_servo_градуси < 0 or завъртяно_servo_градуси > 180):
-        return завъртяно_servo_градуси
-    else:
-        return servo
-
 def on_received_string(receivedString):
     global command, s0, s1, s2, true_false
     command = parse_float(receivedString)
     if command & S1_RIGHT:
-        s0 = градуси(s0, 10)
+        s0 = degrees(s0, 10)
     elif command & S1_LEFT:
-        s0 = градуси(s0, -10)
+        s0 = degrees(s0, -10)
     if command & S2_BACK:
-        s1 = градуси(s1, 10)
+        s1 = degrees(s1, 10)
     elif command & S2_FORWARD:
-        s1 = градуси(s1, -10)
+        s1 = degrees(s1, -10)
     if command & S3_BACK:
-        s2 = градуси(s2, 10)
+        s2 = degrees(s2, 10)
     elif command & S3_FORWARD:
-        s2 = градуси(s2, -10)
+        s2 = degrees(s2, -10)
     if command & PINCH_CLOSE:
         if not (true_false):
             wuKong.set_servo_angle(wuKong.ServoTypeList._180, wuKong.ServoList.S3, 20)
@@ -48,7 +40,14 @@ def on_received_string(receivedString):
         wuKong.stop_all_motor()
 radio.on_received_string(on_received_string)
 
-завъртяно_servo_градуси = 0
+def degrees(servo: number, add_degrees: number):
+    global rotate_servo_degrees
+    rotate_servo_degrees = servo + add_degrees
+    if not (rotate_servo_degrees < 0 or rotate_servo_degrees > 180):
+        return rotate_servo_degrees
+    else:
+        return servo
+rotate_servo_degrees = 0
 true_false = 0
 s2 = 0
 s1 = 0
