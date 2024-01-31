@@ -1,9 +1,9 @@
 radio.onReceivedString(function (receivedString) {
     command = parseFloat(receivedString)
     if (command & S1_RIGHT) {
-        s0 = degrees(s0, 10)
-    } else if (command & S1_LEFT) {
         s0 = degrees(s0, -10)
+    } else if (command & S1_LEFT) {
+        s0 = degrees(s0, 10)
     }
     if (command & S2_BACK) {
         s1 = degrees(s1, 10)
