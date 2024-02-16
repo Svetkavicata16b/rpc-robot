@@ -6,14 +6,14 @@ radio.onReceivedString(function (receivedString) {
         s0 = degrees(s0, 10)
     }
     if (command & S2_BACK) {
-        s1 = degrees(s1, 10)
-    } else if (command & S2_FORWARD) {
         s1 = degrees(s1, -10)
+    } else if (command & S2_FORWARD) {
+        s1 = degrees(s1, 10)
     }
     if (command & S3_BACK) {
-        s2 = degrees(s2, 10)
-    } else if (command & S3_FORWARD) {
         s2 = degrees(s2, -10)
+    } else if (command & S3_FORWARD) {
+        s2 = degrees(s2, 10)
     }
     if (command & PINCH_CLOSE) {
         if (!(true_false)) {
@@ -61,8 +61,8 @@ let s0 = 0
 let command = 0
 wuKong.setServoAngle(wuKong.ServoTypeList._180, wuKong.ServoList.S0, 90)
 s0 = 90
-wuKong.setServoAngle(wuKong.ServoTypeList._180, wuKong.ServoList.S1, 180)
-s1 = 180
+wuKong.setServoAngle(wuKong.ServoTypeList._180, wuKong.ServoList.S1, 0)
+s1 = 0
 wuKong.setServoAngle(wuKong.ServoTypeList._180, wuKong.ServoList.S2, 90)
 s2 = 90
 wuKong.setServoAngle(wuKong.ServoTypeList._180, wuKong.ServoList.S3, 90)
