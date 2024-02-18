@@ -1,31 +1,37 @@
-radio.onReceivedString(function (receivedString) {
+radio.onReceivedString(function on_received_string(receivedString: string) {
+    
     command = parseFloat(receivedString)
     if (command & S1_RIGHT) {
         s0 = degrees(s0, -10)
     } else if (command & S1_LEFT) {
         s0 = degrees(s0, 10)
     }
+    
     if (command & S2_BACK) {
         s1 = degrees(s1, -10)
     } else if (command & S2_FORWARD) {
         s1 = degrees(s1, 10)
     }
+    
     if (command & S3_BACK) {
         s2 = degrees(s2, -10)
     } else if (command & S3_FORWARD) {
         s2 = degrees(s2, 10)
     }
+    
     if (command & PINCH_CLOSE) {
-        if (!(true_false)) {
+        if (!true_false) {
             wuKong.setServoAngle(wuKong.ServoTypeList._180, wuKong.ServoList.S3, 20)
             true_false = 1
         } else {
             wuKong.setServoAngle(wuKong.ServoTypeList._180, wuKong.ServoList.S3, 90)
             true_false = 0
         }
+        
     } else if (command & PINCH_OPEN) {
         wuKong.setServoAngle(wuKong.ServoTypeList._180, wuKong.ServoList.S3, 90)
     }
+    
     if (command & CAR_FORWARD) {
         wuKong.setAllMotor(50, 50)
         basic.pause(200)
@@ -35,6 +41,7 @@ radio.onReceivedString(function (receivedString) {
         basic.pause(200)
         wuKong.stopAllMotor()
     }
+    
     if (command & CAR_RIGHT) {
         wuKong.setAllMotor(50, -50)
         basic.pause(200)
@@ -44,15 +51,19 @@ radio.onReceivedString(function (receivedString) {
         basic.pause(200)
         wuKong.stopAllMotor()
     }
+    
 })
-function degrees (servo: number, add_degrees: number) {
+function degrees(servo: number, add_degrees: number): number {
+    
     rotate_servo_degrees = servo + add_degrees
     if (!(rotate_servo_degrees < 0 || rotate_servo_degrees > 180)) {
         return rotate_servo_degrees
     } else {
         return servo
     }
+    
 }
+
 let rotate_servo_degrees = 0
 let true_false = 0
 let s2 = 0
@@ -81,7 +92,7 @@ let CAR_LEFT = 2048
 let again = 4096
 true_false = 0
 radio.setGroup(1)
-basic.forever(function () {
+basic.forever(function on_forever() {
     wuKong.setServoAngle(wuKong.ServoTypeList._180, wuKong.ServoList.S0, s0)
     wuKong.setServoAngle(wuKong.ServoTypeList._180, wuKong.ServoList.S1, s1)
     wuKong.setServoAngle(wuKong.ServoTypeList._180, wuKong.ServoList.S2, s2)

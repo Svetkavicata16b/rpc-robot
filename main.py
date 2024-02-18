@@ -2,17 +2,17 @@ def on_received_string(receivedString):
     global command, s0, s1, s2, true_false
     command = parse_float(receivedString)
     if command & S1_RIGHT:
-        s0 = degrees(s0, 10)
-    elif command & S1_LEFT:
         s0 = degrees(s0, -10)
+    elif command & S1_LEFT:
+        s0 = degrees(s0, 10)
     if command & S2_BACK:
-        s1 = degrees(s1, 10)
-    elif command & S2_FORWARD:
         s1 = degrees(s1, -10)
+    elif command & S2_FORWARD:
+        s1 = degrees(s1, 10)
     if command & S3_BACK:
-        s2 = degrees(s2, 10)
-    elif command & S3_FORWARD:
         s2 = degrees(s2, -10)
+    elif command & S3_FORWARD:
+        s2 = degrees(s2, 10)
     if command & PINCH_CLOSE:
         if not (true_false):
             wuKong.set_servo_angle(wuKong.ServoTypeList._180, wuKong.ServoList.S3, 20)
@@ -55,8 +55,8 @@ s0 = 0
 command = 0
 wuKong.set_servo_angle(wuKong.ServoTypeList._180, wuKong.ServoList.S0, 90)
 s0 = 90
-wuKong.set_servo_angle(wuKong.ServoTypeList._180, wuKong.ServoList.S1, 180)
-s1 = 180
+wuKong.set_servo_angle(wuKong.ServoTypeList._180, wuKong.ServoList.S1, 0)
+s1 = 0
 wuKong.set_servo_angle(wuKong.ServoTypeList._180, wuKong.ServoList.S2, 90)
 s2 = 90
 wuKong.set_servo_angle(wuKong.ServoTypeList._180, wuKong.ServoList.S3, 90)
